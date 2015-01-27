@@ -57,7 +57,7 @@
 		[titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20]];
 		[titleLabel setText:@"RTLabel"];
 		[self.navigationItem setTitleView:titleLabel];
-		[titleLabel setTextAlignment:UITextAlignmentCenter];
+		[titleLabel setTextAlignment:NSTextAlignmentCenter];
 		
 		_dataArray = [NSMutableArray array];
 		NSMutableDictionary *row1 = [NSMutableDictionary dictionary];
@@ -117,7 +117,7 @@
         rtLabel.lineSpacing = 20.0;
 		[rtLabel setText:[rowInfo objectForKey:@"text"]];
 		CGSize optimumSize = [rtLabel optimumSize];
-		[rowInfo setObject:[NSNumber numberWithFloat:optimumSize.height+20] forKey:@"cell_height"];
+		[rowInfo setObject:[NSNumber numberWithDouble:optimumSize.height+20] forKey:@"cell_height"];
 		return [[rowInfo objectForKey:@"cell_height"] floatValue];
 	}
 
