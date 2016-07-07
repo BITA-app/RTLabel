@@ -866,6 +866,7 @@
 	NSMutableArray *components = [NSMutableArray array];
 	
 	NSInteger last_position = 0;
+    
 	scanner = [NSScanner scannerWithString:data];
 	while (![scanner isAtEnd])
     {
@@ -873,6 +874,10 @@
 		[scanner scanUpToString:@">" intoString:&text];
 		
 		NSString *delimiter = [NSString stringWithFormat:@"%@>", text];
+        
+        data = [data stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+        data = [data stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+        
 		NSInteger position = [data rangeOfString:delimiter].location;
 		if (position!=NSNotFound)
 		{
@@ -884,9 +889,6 @@
 			{
 				data = [data stringByReplacingOccurrencesOfString:delimiter withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(last_position, position+delimiter.length-last_position)];
 			}
-			
-			data = [data stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
-			data = [data stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
 		}
 		
 		if ([text rangeOfString:@"</"].location==0)
