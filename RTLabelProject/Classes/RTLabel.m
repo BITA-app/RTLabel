@@ -868,15 +868,16 @@
 	NSInteger last_position = 0;
     
 	scanner = [NSScanner scannerWithString:data];
+    
+    data = [data stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    data = [data stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    
 	while (![scanner isAtEnd])
     {
 		[scanner scanUpToString:@"<" intoString:NULL];
 		[scanner scanUpToString:@">" intoString:&text];
 		
 		NSString *delimiter = [NSString stringWithFormat:@"%@>", text];
-        
-        data = [data stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
-        data = [data stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
         
 		NSInteger position = [data rangeOfString:delimiter].location;
 		if (position!=NSNotFound)
